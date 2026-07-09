@@ -17,7 +17,7 @@
         body {
             font-family: 'Inter', Arial, sans-serif;
             background: #0b0c10;
-            background-linear: linear-gradient(135deg, #0b0c10 0%, #1f2833 100%);
+            background-image: linear-gradient(135deg, #0b0c10 0%, #1f2833 100%);
             color: #c5a880; /* Tono dorado suave para texto secundario */
             margin: 0;
             padding: 0;
@@ -63,8 +63,126 @@
             padding: 3px 10px;
             border-radius: 20px;
             text-transform: uppercase;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             letter-spacing: 1px;
+        }
+
+        /* --- DISEÑO DE LA TARJETA CLIMA (Interfaz Mu Online) --- */
+        .mu-weather-card {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            min-width: 280px;
+            padding: 14px 25px;
+            background: linear-gradient(135deg, #121620 0%, #06080c 100%);
+            border: 2px solid #b89742;
+            border-radius: 6px;
+            box-shadow: 
+                0 0 0 1px #1a150b, 
+                inset 0 0 12px rgba(184, 151, 66, 0.2), 
+                0 8px 25px rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .mu-sky-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.45;
+        }
+
+        .mu-moon {
+            position: absolute;
+            top: 8px;
+            right: 15px;
+            width: 14px;
+            height: 14px;
+            background: #fff8db;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff8db, 0 0 20px #ffea9f;
+        }
+
+        .mu-star {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 4px #ffffff;
+        }
+
+        .mu-star.s1 { top: 12px; left: 20%; width: 2px; height: 2px; animation: muTwinkle 1.5s infinite ease-in-out; }
+        .mu-star.s2 { top: 25px; left: 45%; width: 3px; height: 3px; animation: muTwinkle 2.3s infinite ease-in-out 0.4s; }
+        .mu-star.s3 { top: 15px; left: 70%; width: 2px; height: 2px; animation: muTwinkle 1.9s infinite ease-in-out 0.8s; }
+        .mu-star.s4 { top: 32px; left: 85%; width: 2px; height: 2px; animation: muTwinkle 2.5s infinite ease-in-out 0.2s; }
+
+        @keyframes muTwinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .mu-card-body {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-align: left;
+        }
+
+        .mu-weather-icon {
+            font-size: 28px;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
+        }
+
+        .mu-weather-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mu-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #b89742;
+            font-weight: bold;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            margin-bottom: 3px;
+        }
+
+        .mu-phase {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+            white-space: nowrap;
+        }
+
+        .mu-metal-shine {
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 60%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+            background: linear-gradient(
+                90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.03) 25%,
+                rgba(255, 255, 255, 0.28) 50%, 
+                rgba(255, 255, 255, 0.03) 75%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            animation: muMetalGlow 4.5s infinite ease-in-out;
+        }
+
+        @keyframes muMetalGlow {
+            0% { left: -150%; }
+            30%, 100% { left: 150%; }
         }
 
         /* Caja de Estado en Tiempo Real */
@@ -120,7 +238,6 @@
             border: 1px solid transparent;
         }
 
-        /* Botón Principal (Web) */
         .btn-main {
             background: linear-gradient(90deg, #1f4068, #162447);
             color: #ffffff;
@@ -133,7 +250,6 @@
             background: linear-gradient(90deg, #244d7d, #1b2c56);
         }
 
-        /* Botón Informativo (Blogspot) */
         .btn-info {
             background: #242526;
             color: #e4e6eb;
@@ -145,7 +261,6 @@
             color: #ffffff;
         }
 
-        /* Botón Soporte / Old Browser (mex.sytes.net) */
         .btn-support {
             background: #1a1a24;
             color: #a0aec0;
@@ -200,12 +315,12 @@
             letter-spacing: 0.5px;
         }
 
-        /* Adaptación para pantallas móviles */
         @media (max-width: 600px) {
             h1 { font-size: 22px; }
             .btn-game { padding: 14px; font-size: 15px; }
             .mu-discord-frame iframe { height: 400px; }
             .mu-discord-header { font-size: 11px; }
+            .mu-weather-card { min-width: 240px; padding: 10px 15px; }
         }
     </style>
 </head>
@@ -220,6 +335,26 @@
             <h1>MU ÉXTASIS</h1>
             <div class="version-badge">Season 6 Ep 20</div>
             
+            <!-- TARJETA CLIMA INTERFAZ MU ONLINE -->
+            <div class="mu-weather-card">
+                <div class="mu-sky-bg">
+                    <div class="mu-star s1"></div>
+                    <div class="mu-star s2"></div>
+                    <div class="mu-star s3"></div>
+                    <div class="mu-star s4"></div>
+                    <div class="mu-moon"></div>
+                </div>
+
+                <div class="mu-card-body">
+                    <span class="mu-weather-icon" id="mu-w-icon">☀️</span>
+                    <div class="mu-weather-info">
+                        <span class="mu-label">Tiempo en el Mundo</span>
+                        <span class="mu-phase" id="mu-w-phase">Cargando...</span>
+                    </div>
+                </div>
+                <div class="mu-metal-shine"></div>
+            </div>
+
             <!-- Panel de Estado en Vivo -->
             <div class="status-panel">
                 <span id="state-dot" class="status-dot checking-dot"></span>
@@ -255,31 +390,70 @@
         </div>
     </div>
 
-    <!-- Script de diagnóstico en tiempo real sin recargar página -->
+    <!-- Scripts combinados de Clima y Diagnóstico -->
     <script>
+        // --- LÓGICA TARJETA CLIMA ---
+        (function() {
+            var TIMED_WEATHER = [
+                { text: "Noche despejada", icon: "🌌" },        
+                { text: "Madrugada fría", icon: "✨" },         
+                { text: "Amanecer dorado", icon: "🌅" },        
+                { text: "Mañana despejada", icon: "☀️" },        
+                { text: "Hora de comida templada", icon: "☀️" }, 
+                { text: "Tarde despejada", icon: "🌤️" },         
+                { text: "Atardecer carmesí", icon: "🌆" },       
+                { text: "Anochecer sereno", icon: "🌙" }         
+            ];
+
+            function getActiveSlot() {
+                return Math.floor(new Date().getHours() / 3);
+            }
+
+            function renderWeatherWidget() {
+                var iconBox = document.getElementById("mu-w-icon");
+                var phaseBox = document.getElementById("mu-w-phase");
+                var currentSlot = getActiveSlot();
+
+                if (iconBox && phaseBox && TIMED_WEATHER[currentSlot]) {
+                    iconBox.textContent = TIMED_WEATHER[currentSlot].icon;
+                    phaseBox.textContent = TIMED_WEATHER[currentSlot].text;
+                }
+            }
+
+            renderWeatherWidget();
+            setInterval(renderWeatherWidget, 60000);
+        })();
+
+        // --- LÓGICA DIAGNÓSTICO EN TIEMPO REAL (Fijo para evitar fallas por CORS) ---
         var sDot = document.getElementById('state-dot');
         var sText = document.getElementById('state-text');
         var mainBtn = document.getElementById('main-web-btn');
         
-        // Probamos cargar un elemento ligero de tu sitio para comprobar disponibilidad
-        var checkUrl = 'https://www.muextasis.com/favicon.ico'; 
+        var imgCheck = new Image();
         
-        var controller = new AbortController();
-        var timeout = setTimeout(function() { controller.abort(); }, 4500); // Límite de 4.5 segundos
-
-        fetch(checkUrl, { mode: 'no-cors', signal: controller.signal })
-            .then(function() {
-                sDot.className = "status-dot online-dot";
-                sText.innerText = "Sitio Principal: EN LÍNEA";
-                sText.style.color = "#23a55a";
-            })
-            .catch(function(err) {
+        imgCheck.onload = function() {
+            sDot.className = "status-dot online-dot";
+            sText.innerText = "Sitio Principal: EN LÍNEA";
+            sText.style.color = "#23a55a";
+        };
+        
+        imgCheck.onerror = function() {
+            sDot.className = "status-dot offline-dot";
+            sText.innerText = "Sitio Principal: BAJO MANTENIMIENTO O LENTO";
+            sText.style.color = "#f23f43";
+            mainBtn.style.border = "1px solid #f23f43";
+        };
+        
+        // Petición asíncrona usando el favicon de tu propio hosting
+        imgCheck.src = 'https://www.muextasis.com/favicon.ico?t=' + new Date().getTime();
+        
+        setTimeout(function() {
+            if (sDot.className === "status-dot checking-dot") {
                 sDot.className = "status-dot offline-dot";
-                sText.innerText = "Sitio Principal: BAJO MANTENIMIENTO O LENTO";
+                sText.innerText = "Sitio Principal: RESPUESTA LENTA";
                 sText.style.color = "#f23f43";
-                // Añade un sutil efecto visual al botón principal si está fallando el hosting
-                mainBtn.style.border = "1px solid #f23f43";
-            });
+            }
+        }, 5000);
     </script>
 </body>
 </html>
