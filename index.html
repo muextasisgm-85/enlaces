@@ -3,138 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estado del Servicio & Accesos | Don Informático</title>
-    <meta name="description" content="Página de acceso alternativo y estado de los servicios de Don Informático. Encuentra enlaces a nuestra web principal, de respaldo y versiones ligeras.">
+    <title>Mu Éxtasis S6 Ep20 - Portal de Accesos y Estado</title>
+    <meta name="description" content="Portal oficial de accesos alternativos para Mu Éxtasis Season 6 Episode 20. Revisa el estado del servidor y accede a nuestras plataformas web y comunidad.">
     <meta name="robots" content="index, follow">
+    
+    <!-- Fuentes de Google para estilo Gaming -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* CSS limpio y compatible con navegadores antiguos mediante selectores básicos */
+        /* Diseño Base Estilo Oscuro / MMORPG */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f9;
-            color: #333333;
+            font-family: 'Inter', Arial, sans-serif;
+            background: #0b0c10;
+            background-linear: linear-gradient(135deg, #0b0c10 0%, #1f2833 100%);
+            color: #c5a880; /* Tono dorado suave para texto secundario */
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 750px;
+            margin: 30px auto;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .main-card {
+            background: rgba(26, 26, 36, 0.95);
+            border: 2px solid #45a29e; /* Color acento cyan/oscuro */
+            border-radius: 16px;
+            padding: 30px 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(69, 162, 158, 0.2);
             text-align: center;
         }
-        .container {
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 20px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
+
+        /* Tipografía e Identidad */
         h1 {
-            color: #1a365d;
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-        .subtitle {
-            color: #718096;
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-        .status-box {
-            padding: 12px;
-            background-color: #edf2f7;
-            border-radius: 6px;
-            margin-bottom: 25px;
-            font-weight: bold;
-            font-size: 15px;
-        }
-        .online { color: #2f855a; }
-        .offline { color: #c53030; }
-        .checking { color: #4a5568; }
-        
-        .btn-link {
-            display: block;
-            background: #2b6cb0;
+            font-family: 'Cinzel', serif;
             color: #ffffff;
-            padding: 14px;
-            margin: 12px 0;
-            text-decoration: none;
-            border-radius: 6px;
+            font-size: 28px;
+            margin: 0 0 5px 0;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: #45a29e;
+            color: #0b0c10;
+            font-size: 11px;
             font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        /* Caja de Estado en Tiempo Real */
+        .status-panel {
+            background: #12121a;
+            border: 1px solid #232331;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .checking-dot { background-color: #a0aec0; animation: pulse 1s infinite; }
+        .online-dot { background-color: #23a55a; box-shadow: 0 0 8px #23a55a; }
+        .offline-dot { background-color: #f23f43; box-shadow: 0 0 8px #f23f43; }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        /* Botones e Interfaz UX (Enlaces) */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .btn-game {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: 700;
             font-size: 16px;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            border: 1px solid transparent;
         }
-        .btn-link:hover {
-            background: #2c5282;
+
+        /* Botón Principal (Web) */
+        .btn-main {
+            background: linear-gradient(90deg, #1f4068, #162447);
+            color: #ffffff;
+            border: 1px solid #45a29e;
+            box-shadow: 0 4px 15px rgba(69, 162, 158, 0.3);
         }
-        .btn-secondary {
-            background: #4a5568;
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(69, 162, 158, 0.5);
+            background: linear-gradient(90deg, #244d7d, #1b2c56);
         }
-        .btn-secondary:hover {
-            background: #2d3748;
+
+        /* Botón Informativo (Blogspot) */
+        .btn-info {
+            background: #242526;
+            color: #e4e6eb;
+            border: 1px solid #3a3b3c;
         }
-        .btn-retro {
-            background: #718096;
+        .btn-info:hover {
+            transform: translateY(-2px);
+            background: #3a3b3c;
+            color: #ffffff;
         }
-        .btn-retro:hover {
-            background: #4a5568;
-        }
-        
-        .footer-text {
-            margin-top: 30px;
-            font-size: 12px;
+
+        /* Botón Soporte / Old Browser (mex.sytes.net) */
+        .btn-support {
+            background: #1a1a24;
             color: #a0aec0;
+            border: 1px dashed #4a5568;
+            font-size: 14px;
+        }
+        .btn-support:hover {
+            transform: translateY(-2px);
+            border-color: #45a29e;
+            color: #ffffff;
+        }
+
+        /* Estilos del Widget de Discord Integrado */
+        .mu-discord-frame {
+            width: 100%;
+            background: #1e1f22;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+            border: 1px solid #35363c;
+            margin-top: 25px;
+        }
+
+        .mu-discord-header {
+            background: #2b2d31;
+            color: #ffffff;
+            padding: 12px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #232428;
+            justify-content: center;
+        }
+
+        .status-icon {
+            width: 10px;
+            height: 10px;
+            background-color: #23a55a;
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0 0 8px #23a55a;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 11px;
+            color: #4a5568;
+            letter-spacing: 0.5px;
+        }
+
+        /* Adaptación para pantallas móviles */
+        @media (max-width: 600px) {
+            h1 { font-size: 22px; }
+            .btn-game { padding: 14px; font-size: 15px; }
+            .mu-discord-frame iframe { height: 400px; }
+            .mu-discord-header { font-size: 11px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Pre-carga oculta usando etiquetas estándar de HTML (link rel=prefetch / prerender) -->
-    <!-- Reemplaza estas URLs con las tuyas reales para que el navegador las vaya cargando en segundo plano -->
-    <link rel="prefetch" href="https://www.doninformatico.com">
-    <link rel="prerender" href="https://www.doninformatico.com">
+    <!-- Precarga inteligente en segundo plano del sitio principal -->
+    <link rel="prefetch" href="https://www.muextasis.com">
+    <link rel="prerender" href="https://www.muextasis.com">
 
-    <div class="container">
-        <h1>Don Informático</h1>
-        <div class="subtitle">Portal de Accesos Alternativos y Estado del Sistema</div>
-        
-        <!-- Cuadro de Estado Dinámico -->
-        <div class="status-box">
-            Estado de la Web Principal: <span id="status-text" class="checking">Verificando...</span>
+    <div class="wrapper">
+        <div class="main-card">
+            <h1>MU ÉXTASIS</h1>
+            <div class="version-badge">Season 6 Ep 20</div>
+            
+            <!-- Panel de Estado en Vivo -->
+            <div class="status-panel">
+                <span id="state-dot" class="status-dot checking-dot"></span>
+                <span id="state-text">Verificando conexión con el servidor principal...</span>
+            </div>
+
+            <!-- Contenedor de Accesos -->
+            <div class="links-container">
+                <a id="main-web-btn" href="https://www.muextasis.com" target="_blank" class="btn-game btn-main">
+                    ⚔️ Entrar a la Web Principal
+                </a>
+                
+                <a href="https://muextasiss6.blogspot.com/" target="_blank" class="btn-game btn-info">
+                    📖 Web Informativa & Guías (Blog)
+                </a>
+                
+                <a href="http://mex.sytes.net" target="_blank" class="btn-game btn-support">
+                    🖥️ Servidor de Respaldo & Navegadores Antiguos
+                </a>
+            </div>
+
+            <!-- Widget Discord Oficial de la Comunidad -->
+            <div class="mu-discord-frame">
+                <div class="mu-discord-header">
+                    <span class="status-icon"></span> COMUNIDAD EN VIVO - MU EXTASIS
+                </div>
+                <iframe frameborder="0" height="500" src="https://e.widgetbot.io/channels/1218641089875935332/1218641091146813481" width="100%"></iframe>
+            </div>
+
+            <div class="footer">
+                MU ÉXTASIS © Portal de Emergencia Independiente en GitHub Pages
+            </div>
         </div>
-
-        <!-- Enlaces a las versiones -->
-        <a id="main-link" href="https://www.doninformatico.com" class="btn-link" target="_blank">
-            Ir a la Web Principal (Recomendado)
-        </a>
-        
-        <a href="https://respaldo.doninformatico.com" class="btn-link btn-secondary" target="_blank">
-            Servidor de Respaldo (Alternativo)
-        </a>
-        
-        <a href="https://viejo.doninformatico.com" class="btn-link btn-retro" target="_blank">
-            Versión Ligera (Navegadores Antiguos)
-        </a>
-
-        <p class="footer-text">
-            Este portal está alojado de forma independiente en GitHub Pages para garantizar disponibilidad total.
-        </p>
     </div>
 
+    <!-- Script de diagnóstico en tiempo real sin recargar página -->
     <script>
-        // Script simple para verificar si el sitio principal responde
-        // Si tarda más de 4 segundos o da error, cambia el estado visualmente
-        var statusText = document.getElementById('status-text');
-        var mainLink = document.getElementById('main-link');
-        var testUrl = 'https://www.doninformatico.com/favicon.ico'; // Archivo ligero para probar
-
+        var sDot = document.getElementById('state-dot');
+        var sText = document.getElementById('state-text');
+        var mainBtn = document.getElementById('main-web-btn');
+        
+        // Probamos cargar un elemento ligero de tu sitio para comprobar disponibilidad
+        var checkUrl = 'https://www.muextasis.com/favicon.ico'; 
+        
         var controller = new AbortController();
-        var timeoutId = setTimeout(() => controller.abort(), 4000); // 4 segundos de límite
+        var timeout = setTimeout(function() { controller.abort(); }, 4500); // Límite de 4.5 segundos
 
-        fetch(testUrl, { mode: 'no-cors', signal: controller.signal })
+        fetch(checkUrl, { mode: 'no-cors', signal: controller.signal })
             .then(function() {
-                statusText.innerText = "En Línea (Normal)";
-                statusText.className = "online";
+                sDot.className = "status-dot online-dot";
+                sText.innerText = "Sitio Principal: EN LÍNEA";
+                sText.style.color = "#23a55a";
             })
             .catch(function(err) {
-                statusText.innerText = "Fuera de Servicio / Lento";
-                statusText.className = "offline";
-                // Opcional: resaltar el botón de respaldo si el principal falla
-                mainLink.style.opacity = "0.6";
+                sDot.className = "status-dot offline-dot";
+                sText.innerText = "Sitio Principal: BAJO MANTENIMIENTO O LENTO";
+                sText.style.color = "#f23f43";
+                // Añade un sutil efecto visual al botón principal si está fallando el hosting
+                mainBtn.style.border = "1px solid #f23f43";
             });
     </script>
 </body>
