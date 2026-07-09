@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado del Servicio & Accesos | Don Informático</title>
+    <meta name="description" content="Página de acceso alternativo y estado de los servicios de Don Informático. Encuentra enlaces a nuestra web principal, de respaldo y versiones ligeras.">
+    <meta name="robots" content="index, follow">
+    <style>
+        /* CSS limpio y compatible con navegadores antiguos mediante selectores básicos */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        h1 {
+            color: #1a365d;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        .status-box {
+            padding: 12px;
+            background-color: #edf2f7;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .online { color: #2f855a; }
+        .offline { color: #c53030; }
+        .checking { color: #4a5568; }
+        
+        .btn-link {
+            display: block;
+            background: #2b6cb0;
+            color: #ffffff;
+            padding: 14px;
+            margin: 12px 0;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+        .btn-link:hover {
+            background: #2c5282;
+        }
+        .btn-secondary {
+            background: #4a5568;
+        }
+        .btn-secondary:hover {
+            background: #2d3748;
+        }
+        .btn-retro {
+            background: #718096;
+        }
+        .btn-retro:hover {
+            background: #4a5568;
+        }
+        
+        .footer-text {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #a0aec0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pre-carga oculta usando etiquetas estándar de HTML (link rel=prefetch / prerender) -->
+    <!-- Reemplaza estas URLs con las tuyas reales para que el navegador las vaya cargando en segundo plano -->
+    <link rel="prefetch" href="https://www.doninformatico.com">
+    <link rel="prerender" href="https://www.doninformatico.com">
+
+    <div class="container">
+        <h1>Don Informático</h1>
+        <div class="subtitle">Portal de Accesos Alternativos y Estado del Sistema</div>
+        
+        <!-- Cuadro de Estado Dinámico -->
+        <div class="status-box">
+            Estado de la Web Principal: <span id="status-text" class="checking">Verificando...</span>
+        </div>
+
+        <!-- Enlaces a las versiones -->
+        <a id="main-link" href="https://www.doninformatico.com" class="btn-link" target="_blank">
+            Ir a la Web Principal (Recomendado)
+        </a>
+        
+        <a href="https://respaldo.doninformatico.com" class="btn-link btn-secondary" target="_blank">
+            Servidor de Respaldo (Alternativo)
+        </a>
+        
+        <a href="https://viejo.doninformatico.com" class="btn-link btn-retro" target="_blank">
+            Versión Ligera (Navegadores Antiguos)
+        </a>
+
+        <p class="footer-text">
+            Este portal está alojado de forma independiente en GitHub Pages para garantizar disponibilidad total.
+        </p>
+    </div>
+
+    <script>
+        // Script simple para verificar si el sitio principal responde
+        // Si tarda más de 4 segundos o da error, cambia el estado visualmente
+        var statusText = document.getElementById('status-text');
+        var mainLink = document.getElementById('main-link');
+        var testUrl = 'https://www.doninformatico.com/favicon.ico'; // Archivo ligero para probar
+
+        var controller = new AbortController();
+        var timeoutId = setTimeout(() => controller.abort(), 4000); // 4 segundos de límite
+
+        fetch(testUrl, { mode: 'no-cors', signal: controller.signal })
+            .then(function() {
+                statusText.innerText = "En Línea (Normal)";
+                statusText.className = "online";
+            })
+            .catch(function(err) {
+                statusText.innerText = "Fuera de Servicio / Lento";
+                statusText.className = "offline";
+                // Opcional: resaltar el botón de respaldo si el principal falla
+                mainLink.style.opacity = "0.6";
+            });
+    </script>
+</body>
+</html>
